@@ -12,7 +12,7 @@ export class ForcaComponent implements OnInit {
   public palavra: string;
   public letras: string[];
   public letrasIncorretas: string[] = [];
-  public chances: number = 7;
+  public chances: number = 6;
 
   constructor() { }
 
@@ -29,10 +29,10 @@ export class ForcaComponent implements OnInit {
   }
 
   limpa() {
-    this.palavra = '';
-    this.letras = [];
+    this.palavra = null;
+    this.letras = null;
     this.letrasIncorretas = [];
-    this.chances = 7;
+    this.chances = 6;
   }
 
 }

@@ -7,10 +7,8 @@ import { Component, OnInit, ViewChildren } from '@angular/core';
 })
 export class ForcaComponent implements OnInit {
 
-  @ViewChildren('letraIncorreta') letraIncorreta//: NgModel;
-
-  public palavra: string;
   public letras: string[];
+  public letrasCorretas: string[] = [];
   public letrasIncorretas: string[] = [];
   public chances: number = 6;
 
@@ -19,32 +17,45 @@ export class ForcaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  envia() {
-    this.letras = this.palavra.split('');
+  envia(palavra) {
+    this.limpa();
+    this.letras = palavra.split('');
   }
 
-  adicionaLetraIncorreta(letra: string) {
-    if (!letra) {
-      alert('É necessário informar uma letra')
+  adicionaLetra(letra: string) {
+    if (!this.validaLetra(letra))
       return;
-    }
-
-    if (this.chances == 0) {
-      alert('Todas as 6 chances foram esgotadas')
-      return;
-    }
 
     if (this.chances == 1)
       alert('Você foi enforcado x.x');
 
-    this.letrasIncorretas.push(letra);
-    this.chances--;
+    if (this.letras.includes(letra))
+      this.letrasCorretas.push(letra);
+    else {
+      this.letrasIncorretas.push(letra);
+      this.chances--;
+    }
+
+  }
+
+  private validaLetra(letra: string): boolean {
+    if (!letra) {
+      alert('É necessário informar uma letra')
+      return false;
+    }
+
+    if (this.chances == 0) {
+      alert('Todas as 6 chances foram esgotadas')
+      return false;
+    }
+
+    return true;
   }
 
   limpa() {
-    this.palavra = null;
     this.letras = null;
     this.letrasIncorretas = [];
+    this.letrasCorretas = [];
     this.chances = 6;
   }
 

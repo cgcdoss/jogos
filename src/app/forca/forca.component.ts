@@ -34,6 +34,9 @@ export class ForcaComponent implements OnInit {
       return;
     }
 
+    if (this.chances == 1)
+      alert('Você foi enforcado x.x');
+
     this.letrasIncorretas.push(letra);
     this.chances--;
   }

@@ -1,0 +1,27 @@
+Insira a Palavra
+<input [(ngModel)]="palavra" type="password">
+<button (click)="envia()">Ok</button>
+<button (click)="limpa()">Limpar</button>
+
+
+<div *ngIf="letras">
+    <br>
+    <span *ngFor="let l of letras">
+        <span *ngIf="l.includes(' ')">&nbsp;&nbsp;</span>
+        <input *ngIf="!l.includes(' ')" style="width: 15px;">
+    </span>
+</div>
+
+<br><br>
+
+faltam {{chances}} erros para terminar
+
+<br><br>
+
+<div>
+    Letra Incorreta
+    <input #letraIncorreta style="width: 15px;">
+    <button (click)="adicionaLetraIncorreta(letraIncorreta.value); letraIncorreta.value= ''">Ok</button>
+    <br>
+    <span *ngFor="let l of letrasIncorretas">{{l}} </span>
+</div>

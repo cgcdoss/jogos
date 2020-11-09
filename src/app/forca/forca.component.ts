@@ -24,6 +24,16 @@ export class ForcaComponent implements OnInit {
   }
 
   adicionaLetraIncorreta(letra: string) {
+    if (!letra) {
+      alert('É necessário informar uma letra')
+      return;
+    }
+
+    if (this.chances == 0) {
+      alert('Todas as 6 chances foram esgotadas')
+      return;
+    }
+
     this.letrasIncorretas.push(letra);
     this.chances--;
   }
@@ -33,6 +43,10 @@ export class ForcaComponent implements OnInit {
     this.letras = null;
     this.letrasIncorretas = [];
     this.chances = 6;
+  }
+
+  getImgSrc() {
+    return `/assets/forca/forca${(7 - this.chances)}.png`;
   }
 
 }

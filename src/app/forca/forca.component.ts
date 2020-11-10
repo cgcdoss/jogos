@@ -22,7 +22,7 @@ export class ForcaComponent implements OnInit {
   envia(palavra: string) {
     if (palavra.length > 0) {
       this.limpa();
-      this.letras = palavra.split('');
+      this.letras = palavra.toLowerCase().split('');
     }
   }
 
@@ -30,8 +30,8 @@ export class ForcaComponent implements OnInit {
     if (!this.validaLetra(letra))
       return;
 
-
-
+    letra = letra.toLowerCase();
+    
     if (this.letras.includes(letra))
       this.letrasCorretas.push(letra);
     else {

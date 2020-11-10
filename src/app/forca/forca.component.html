@@ -1,12 +1,12 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2" [hidden]="letras">
             <label class="control-label">Insira a Palavra</label>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" [hidden]="letras">
             <input class="form-control" #palavra type="password">
         </div>
-        <div class="col-md-1">
+        <div class="col-md-1" [hidden]="letras">
             <button class="btn btn-primary" (click)="envia(palavra.value); palavra.value = ''">Ok</button>
         </div>
         <div class="col-md-1">
@@ -14,8 +14,10 @@
         </div>
     </div>
 
+    <label *ngIf="letras">O jogo começou</label>
+    
     <br>
-    <div class="row" *ngIf="letras">
+    <div class="row" *ngIf="letras" style="padding-left: 10px;">
         <span *ngFor="let l of letras">
             <span *ngIf="l.includes(' ')">&nbsp;&nbsp;</span>
             <input class="form-control person" disabled *ngIf="!l.includes(' ')"
@@ -45,7 +47,7 @@
     <br>
     Letras erradas: <span *ngFor="let letra of letrasIncorretas">{{letra}}, </span>
 
-    <div class="footer">
+    <!-- <div class="footer">
         <p>Cássio Gabriel</p>
-    </div>
+    </div> -->
 </div>

@@ -17,9 +17,11 @@ export class ForcaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  envia(palavra) {
-    this.limpa();
-    this.letras = palavra.split('');
+  envia(palavra: string) {
+    if (palavra.length > 0) {
+      this.limpa();
+      this.letras = palavra.split('');
+    }
   }
 
   adicionaLetra(letra: string) {

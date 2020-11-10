@@ -1,33 +1,51 @@
-Insira a Palavra
-<input #palavra type="password">
-<button (click)="envia(palavra.value); palavra.value = ''">Ok</button>
-<button (click)="limpa()">Limpar</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <label class="control-label">Insira a Palavra</label>
+        </div>
+        <div class="col-md-6">
+            <input class="form-control" #palavra type="password">
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" (click)="envia(palavra.value); palavra.value = ''">Ok</button>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-secondary" (click)="limpa()">Limpar</button>
+        </div>
+    </div>
 
-
-<div *ngIf="letras">
     <br>
-    <span *ngFor="let l of letras">
-        <span *ngIf="l.includes(' ')">&nbsp;&nbsp;</span>
-        <input disabled *ngIf="!l.includes(' ')" style="width: 15px;" [value]="letrasCorretas.includes(l) ? l : ''">
-    </span>
-</div>
+    <div class="row" *ngIf="letras">
+        <span *ngFor="let l of letras">
+            <span *ngIf="l.includes(' ')">&nbsp;&nbsp;</span>
+            <input class="form-control person" disabled *ngIf="!l.includes(' ')"
+                [value]="letrasCorretas.includes(l) ? l : ''">
+        </span>
+    </div>
 
-<br><br>
+    <br><br>
 
-faltam {{chances}} erros para terminar
-<br>
-<img [src]="getImgSrc()">
+    Faltam {{chances}} erros para terminar
+    <br>
+    <img [src]="getImgSrc()">
 
-<br><br>
+    <br><br>
 
-<div>
-    Adicionar nova letra
-    <input #novaLetra style="width: 15px;">
-    <button (click)="adicionaLetra(novaLetra.value); novaLetra.value= ''">Ok</button>
-</div>
-<br>
-Letras erradas: <span *ngFor="let letra of letrasIncorretas">{{letra}}, </span>
+    <div class="row">
+        <div class="col-md-2">
+            <label class="control-label">Adicionar nova letra</label>
+        </div>
+        <div class="col-md-1">
+            <input class="form-control person" #novaLetra style="width: 15px;">
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" (click)="adicionaLetra(novaLetra.value); novaLetra.value= ''">Ok</button>
+        </div>
+    </div>
+    <br>
+    Letras erradas: <span *ngFor="let letra of letrasIncorretas">{{letra}}, </span>
 
-<div class="footer">
-    <p>Cássio Gabriel</p>
+    <div class="footer">
+        <p>Cássio Gabriel</p>
+    </div>
 </div>

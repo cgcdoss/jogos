@@ -31,7 +31,7 @@ export class ForcaComponent implements OnInit {
       return;
 
     letra = letra.toLowerCase();
-    
+
     if (this.letras.includes(letra))
       this.letrasCorretas.push(letra);
     else {
@@ -49,6 +49,8 @@ export class ForcaComponent implements OnInit {
       alert('É necessário informar uma letra')
       return false;
     }
+    
+    letra = letra.toLowerCase();
 
     if (this.chances == 0) {
       alert('Todas as 6 chances foram esgotadas')

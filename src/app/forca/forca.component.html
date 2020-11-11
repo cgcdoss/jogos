@@ -4,7 +4,12 @@
             <label class="control-label">Insira a Palavra</label>
         </div>
         <div class="col-md-6" [hidden]="letras">
-            <input class="form-control" #palavra type="password">
+            <div class="input-group mb-3">
+                <input class="form-control" #palavra [type]="tipo">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button" (click)="alternaTipo()">{{textoBotao}}</button>
+                </div>
+            </div>
         </div>
         <div class="col-md-1" [hidden]="letras">
             <button class="btn btn-primary" (click)="envia(palavra.value); palavra.value = ''">Ok</button>
@@ -15,7 +20,7 @@
     </div>
 
     <label *ngIf="letras">O jogo começou</label>
-    
+
     <br>
     <div class="row" *ngIf="letras" style="padding-left: 10px;">
         <span *ngFor="let l of letras">

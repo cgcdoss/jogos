@@ -13,6 +13,8 @@ export class ForcaComponent implements OnInit {
   public letrasCorretas: string[] = [];
   public letrasIncorretas: string[] = [];
   public chances: number = 6;
+  public tipo: string = 'password';
+  public textoBotao: string = 'Exibir';
 
   constructor() { }
 
@@ -49,7 +51,7 @@ export class ForcaComponent implements OnInit {
       alert('É necessário informar uma letra')
       return false;
     }
-    
+
     letra = letra.toLowerCase();
 
     if (this.chances == 0) {
@@ -75,6 +77,11 @@ export class ForcaComponent implements OnInit {
 
   getImgSrc() {
     return `/assets/forca/forca${(7 - this.chances)}.png`;
+  }
+
+  alternaTipo() {
+    this.tipo = this.tipo == 'password' ? 'text' : 'password';
+    this.textoBotao = this.textoBotao == 'Exibir' ? 'Ocultar' : 'Exibir';
   }
 
 }

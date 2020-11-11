@@ -34,9 +34,15 @@ export class ForcaComponent implements OnInit {
 
     letra = letra.toLowerCase();
 
-    if (this.letras.includes(letra))
-      this.letrasCorretas.push(letra);
-    else {
+    if (this.letras.includes(letra)) {
+      this.letras.forEach((l, i) => {
+        if (letra == l)
+          this.letrasCorretas[i] = letra;
+      });
+
+      if (JSON.stringify(this.letras) == JSON.stringify(this.letrasCorretas))
+        alert('Parabéns');
+    } else {
       this.letrasIncorretas.push(letra);
 
       if (this.chances == 1)

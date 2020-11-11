@@ -46,21 +46,26 @@ export class ForcaComponent implements OnInit {
 
   }
 
-  private validaLetra(letra: string): boolean {
+  private validaLetra(letra): boolean {
     if (!letra) {
       alert('É necessário informar uma letra')
       return false;
     }
-
     letra = letra.toLowerCase();
 
+    if (letra.length > 1) {
+      alert('Só é possível adicionar uma letra por vez');
+      return false;
+    }
+    if (!letra.match("[a-z]")) {
+      alert('Apenas letras são permitidas')
+      return false;
+    }
     if (this.chances == 0) {
       alert('Todas as 6 chances foram esgotadas')
       return false;
     }
-
     if (this.letrasCorretas.includes(letra) || this.letrasIncorretas.includes(letra)) {
-      this.novaLetra.value = '';
       alert('Essa letra já foi adicionada anteriormente');
       return false;
     }

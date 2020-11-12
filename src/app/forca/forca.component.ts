@@ -26,6 +26,12 @@ export class ForcaComponent implements OnInit {
 
   envia(palavra: string) {
     if (palavra.length > 0) {
+      if (palavra.match("[0-9]")) {
+        alert('Não é permitido colocar número');
+        return;
+      }
+      palavra = this.removeAcentos(palavra);
+
       this.limpa();
       this.letras = palavra.toLowerCase().split('');
       if (palavra.includes(' ')) {
@@ -106,6 +112,12 @@ export class ForcaComponent implements OnInit {
 
   private isMobileTeste(): boolean {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  private removeAcentos(str: string): string {
+    // str = str.normalize("NFD").replace(/[^a-zA-Zs]/, "");
+    const strng = 'ÁÉÍÓÚáéíóúâêîôûàèìòùÇç';
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
 }

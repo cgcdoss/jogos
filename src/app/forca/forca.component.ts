@@ -53,19 +53,15 @@ export class ForcaComponent implements OnInit {
             this.letrasCorretas[i] = letra;
         });
 
-        if (JSON.stringify(this.letras) == JSON.stringify(this.letrasCorretas)) {
-          alert('Parabéns');
+        if (JSON.stringify(this.letras) == JSON.stringify(this.letrasCorretas))
           this.venceu = true;
-        }
       }
     } else {
       if (!this.letrasIncorretas.includes(letra)) {
         this.letrasIncorretas.push(letra);
 
-        if (this.chances == 1) {
-          alert('Você foi enforcado x.x');
+        if (this.chances == 1)
           this.perdeu = true;
-        }
         this.chances--;
       }
     }

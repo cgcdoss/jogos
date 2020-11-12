@@ -15,16 +15,25 @@ export class ForcaComponent implements OnInit {
   public chances: number = 6;
   public tipo: string = 'password';
   public textoBotao: string = 'Exibir';
+  public teclas: string[] = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ç', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+  public isMobile: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.isMobile = this.isMobileTeste();
   }
 
   envia(palavra: string) {
     if (palavra.length > 0) {
       this.limpa();
       this.letras = palavra.toLowerCase().split('');
+      if (palavra.includes(' ')) {
+        this.letras.forEach((l, i) => {
+          if (l == ' ')
+            this.letrasCorretas[i] = ' ';
+        })
+      }
     }
   }
 
@@ -93,6 +102,10 @@ export class ForcaComponent implements OnInit {
   alternaTipo() {
     this.tipo = this.tipo == 'password' ? 'text' : 'password';
     this.textoBotao = this.textoBotao == 'Exibir' ? 'Ocultar' : 'Exibir';
+  }
+
+  private isMobileTeste(): boolean {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
 }

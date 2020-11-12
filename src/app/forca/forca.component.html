@@ -20,42 +20,52 @@
         </div>
     </div>
 
-    <label *ngIf="letras">O jogo começou</label>
 
-    <br>
-    
-    <div class="row" *ngIf="letras" style="padding-left: 10px;">
-        <span *ngFor="let l of letras">
-            <span *ngIf="l.includes(' ')">&nbsp;&nbsp;</span>
-            <input class="form-control person" disabled *ngIf="!l.includes(' ')"
-                [value]="letrasCorretas.includes(l) ? l : ''">
-        </span>
-    </div>
-
-    <br><br>
-
-    <div *ngIf="letras">
-        Faltam {{chances}} erros para terminar
+    <div style="text-align: center;">
+        <label *ngIf="letras">O jogo começou</label>
         <br>
-        <img [src]="getImgSrc()">
+        <div *ngIf="letras">
+            <span *ngFor="let l of letras" style="font-size: 1.75rem;">
+                <span *ngIf="l.includes(' ')">&nbsp;&nbsp;</span>
+                <span *ngIf="!l.includes(' ') && !letrasCorretas.includes(l)">_&nbsp;</span>
+                <span *ngIf="!l.includes(' ') && letrasCorretas.includes(l)">{{l}}</span>
+            </span>
+        </div>
+
+        <br><br>
+
+        <div *ngIf="letras" class="center">
+            Faltam {{chances}} erros para terminar
+            <br>
+            <img [src]="getImgSrc()">
+        </div>
+
+        <br><br>
+
+        <div class="keyboard" *ngIf="letras">
+            <div>
+                <button [class.btn-success]="letrasCorretas.includes(t)"
+                    [class.btn-danger]="letrasIncorretas.includes(t)" [class.btn-sm]="isMobile"
+                    class="btn btn-secondary" *ngFor="let t of teclas.slice(0,10)"
+                    (click)="adicionaLetra(t)">{{t}}</button>
+            </div>
+            <div>
+                <button [class.btn-success]="letrasCorretas.includes(t)"
+                    [class.btn-danger]="letrasIncorretas.includes(t)" [class.btn-sm]="isMobile"
+                    class="btn btn-secondary" *ngFor="let t of teclas.slice(10,20)"
+                    (click)="adicionaLetra(t)">{{t}}</button>
+            </div>
+            <div>
+                <button [class.btn-success]="letrasCorretas.includes(t)"
+                    [class.btn-danger]="letrasIncorretas.includes(t)" [class.btn-sm]="isMobile"
+                    class="btn btn-secondary" *ngFor="let t of teclas.slice(20)"
+                    (click)="adicionaLetra(t)">{{t}}</button>
+            </div>
+        </div>
+
+        <br>
+        <span *ngIf="letras">Letras erradas: <span *ngFor="let letra of letrasIncorretas">{{letra}}, </span></span>
     </div>
-
-    <br><br>
-
-    <div class="row" *ngIf="letras">
-        <div class="col-md-2">
-            <label class="control-label">Adicionar nova letra</label>
-        </div>
-        <div class="col-md-1">
-            <input class="form-control person" #novaLetra style="width: 15px;">
-        </div>
-        <div class="col-md-1">
-            <button class="btn btn-primary" (click)="adicionaLetra(novaLetra.value); novaLetra.value= ''">Ok</button>
-        </div>
-    </div>
-    <br>
-    <span *ngIf="letras">Letras erradas: <span *ngFor="let letra of letrasIncorretas">{{letra}}, </span></span>
-
     <!-- <div class="footer">
         <p>Cássio Gabriel</p>
     </div> -->

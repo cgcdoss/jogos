@@ -42,7 +42,7 @@
 
         <br><br>
 
-        <div class="keyboard" *ngIf="letras">
+        <div class="keyboard" *ngIf="letras && !venceu && !perdeu">
             <div>
                 <button [class.btn-success]="letrasCorretas.includes(t)"
                     [class.btn-danger]="letrasIncorretas.includes(t)" [class.btn-sm]="isMobile"
@@ -62,6 +62,9 @@
                     (click)="adicionaLetra(t)">{{t}}</button>
             </div>
         </div>
+
+        <div *ngIf="venceu">Parabéns, você venceu</div>
+        <div *ngIf="perdeu">Infelizmente você perdeu :(</div>
     </div>
     <!-- <div class="footer">
         <p>Cássio Gabriel</p>

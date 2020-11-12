@@ -17,6 +17,8 @@ export class ForcaComponent implements OnInit {
   public textoBotao: string = 'Exibir';
   public teclas: string[] = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ç', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
   public isMobile: boolean = false;
+  public venceu: boolean = false;
+  public perdeu: boolean = false;
 
   constructor() { }
 
@@ -45,19 +47,27 @@ export class ForcaComponent implements OnInit {
 
   adicionaLetra(letra: string) {
     if (this.letras.includes(letra)) {
-      this.letras.forEach((l, i) => {
-        if (letra == l)
-          this.letrasCorretas[i] = letra;
-      });
+      if (!this.letrasCorretas.includes(letra)) {
+        this.letras.forEach((l, i) => {
+          if (letra == l)
+            this.letrasCorretas[i] = letra;
+        });
 
-      if (JSON.stringify(this.letras) == JSON.stringify(this.letrasCorretas))
-        alert('Parabéns');
+        if (JSON.stringify(this.letras) == JSON.stringify(this.letrasCorretas)) {
+          alert('Parabéns');
+          this.venceu = true;
+        }
+      }
     } else {
-      this.letrasIncorretas.push(letra);
+      if (!this.letrasIncorretas.includes(letra)) {
+        this.letrasIncorretas.push(letra);
 
-      if (this.chances == 1)
-        alert('Você foi enforcado x.x');
-      this.chances--;
+        if (this.chances == 1) {
+          alert('Você foi enforcado x.x');
+          this.perdeu = true;
+        }
+        this.chances--;
+      }
     }
 
   }
@@ -67,6 +77,8 @@ export class ForcaComponent implements OnInit {
     this.letrasIncorretas = [];
     this.letrasCorretas = [];
     this.chances = 6;
+    this.venceu = false;
+    this.perdeu = false;
   }
 
   getImgSrc() {

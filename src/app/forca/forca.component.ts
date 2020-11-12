@@ -27,7 +27,7 @@ export class ForcaComponent implements OnInit {
   }
 
   envia(palavra: string) {
-    if (palavra.length > 0) {
+    if (palavra.trim().length > 0) {
       if (palavra.match("[0-9]")) {
         alert('Não é permitido colocar número');
         return;
@@ -35,7 +35,7 @@ export class ForcaComponent implements OnInit {
       palavra = this.removeAcentos(palavra);
 
       this.limpa();
-      this.letras = palavra.toLowerCase().split('');
+      this.letras = palavra.trim().toLowerCase().split('');
       if (palavra.includes(' ')) {
         this.letras.forEach((l, i) => {
           if (l == ' ')

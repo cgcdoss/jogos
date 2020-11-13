@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, ViewChildren } from '@angular/core';
 
 @Component({
   selector: 'app-forca',
@@ -43,6 +43,8 @@ export class ForcaComponent implements OnInit {
         })
       }
     }
+
+    localStorage.setItem('teste', 'testado');
   }
 
   adicionaLetra(letra: string) {
@@ -94,6 +96,12 @@ export class ForcaComponent implements OnInit {
     // str = str.normalize("NFD").replace(/[^a-zA-Zs]/, "");
     const strng = 'ÁÉÍÓÚáéíóúâêîôûàèìòùÇç';
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler(event) {
+    localStorage.removeItem('teste');
+    console.log(event);
   }
 
 }
